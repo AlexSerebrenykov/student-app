@@ -1,7 +1,7 @@
 import { lazy } from "react"
 import { createBrowserRouter } from "react-router-dom"
+import Layout from "../components/Layout"
 
-const Layout = lazy(() => import("../components/Layout"))
 const StudentsMain = lazy(() => import("./StudentsMain"))
 const ErrorPage = lazy(() => import("./ErrorPage"))
 const StudentDetails = lazy(() => import("./StudentDetails"))

@@ -1,9 +1,9 @@
-import { useEffect } from "react"
 import { Button, FormControl, InputLabel, Modal } from "@mui/material"
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
 import dayjs from "dayjs"
 import isEqual from "lodash.isequal"
+import { useEffect } from "react"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { IStudent } from "../../models/IStudent"
 import { studentsAPI } from "../../services/StudentService"
@@ -69,16 +69,16 @@ const ModalForm = () => {
     try {
       if (studentToEdit) {
         // eslint-disable-next-line
-        const {jobTitle, ...studentToEditCompare} = studentToEdit
-        
-        const updatedStudent = { 
-            ...student, 
-            id: studentToEdit.id, 
-            isFeePaid: isPaidFeeToBool(student.isFeePaid),
-            signingDate: dayjs(student.signingDate).toISOString()
+        const { jobTitle, ...studentToEditCompare } = studentToEdit
+
+        const updatedStudent = {
+          ...student,
+          id: studentToEdit.id,
+          isFeePaid: isPaidFeeToBool(student.isFeePaid),
+          signingDate: dayjs(student.signingDate).toISOString(),
         }
 
-        if(!isEqual(studentToEditCompare, updatedStudent)) {
+        if (!isEqual(studentToEditCompare, updatedStudent)) {
           await updateStudent(updatedStudent).unwrap()
         }
       } else {

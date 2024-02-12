@@ -19,8 +19,6 @@ const FormContainer = styled(Box)(({ theme: { spacing } }) => ({
   gap: spacing(6),
 }))
 
-// <Box display='flex' flexDirection='column' gap={6}>
-
 const ErrorMessage = styled("p")(({ theme }) => ({
   position: "absolute",
   bottom: -20,

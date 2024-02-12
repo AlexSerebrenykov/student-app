@@ -7,9 +7,9 @@ import { useAppDispatch } from "../../store/hooks/redux"
 import { handleModal, handleSnackbar } from "../../store/reducers/ModalWindowsSlice"
 import { editStudent } from "../../store/reducers/StudentSlice"
 
-type DetailsControlsProps = Partial<{
+type DetailsControlsProps = {
   student: IStudent
-}>
+}
 const DetailsControls: FC<DetailsControlsProps> = ({ student }) => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -21,12 +21,12 @@ const DetailsControls: FC<DetailsControlsProps> = ({ student }) => {
   }
   const onEditClick = () => {
     dispatch(handleModal(true))
-    dispatch(editStudent(student as IStudent))
+    dispatch(editStudent(student))
   }
 
   const onDeleteClick = async () => {
     try {
-      await deleteStudent(student?.id as string).unwrap()
+      await deleteStudent(student.id).unwrap()
       dispatch(handleSnackbar({ state: true, isError: false }))
       navigate("/")
     } catch (error) {
