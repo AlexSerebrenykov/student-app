@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 import { IStudent } from "../../models/IStudent"
 import { studentsAPI } from "../../services/StudentService"
 import { useAppDispatch } from "../../store/hooks/redux"
-import { handleModal } from "../../store/reducers/ModalWindowsSlice"
+import { handleModal, handleSnackbar } from "../../store/reducers/ModalWindowsSlice"
 import { editStudent } from "../../store/reducers/StudentSlice"
 import InfoBox from "./InfoBox"
 import { Card, CardContent, CardImage } from "./Styled"
@@ -26,8 +26,13 @@ const StudentCard: FC<StudentCardProps> = ({ student }) => {
     dispatch(editStudent(student))
   }
 
-  const onStudentDelete = () => {
-    deleteStudent(id)
+  const onStudentDelete = async () => {
+    try {
+      await deleteStudent(id).unwrap()
+      dispatch(handleSnackbar({ state: true, isError: false }))
+    } catch (error) {
+      dispatch(handleSnackbar({ state: true, isError: true }))
+    }
   }
 
   return (

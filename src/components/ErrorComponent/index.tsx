@@ -9,7 +9,7 @@ type ErrorProps = {
 const ErrorComponent: FC<ErrorProps> = ({ type = "main" }) => {
   const navigate = useNavigate()
   const onClick = () => {
-    navigate(type === "main" ? 0 : -1)
+    type === "main" ? navigate(0) : navigate("/")
   }
   return (
     <ErrorContainer>
@@ -17,7 +17,7 @@ const ErrorComponent: FC<ErrorProps> = ({ type = "main" }) => {
         No data found
       </Typography>
       <Button variant='contained' size='small' color='secondary' onClick={onClick}>
-        {type === "main" ? "Refresh" : "Back"}
+        {type === "main" ? "Refresh" : "Go to home page"}
       </Button>
     </ErrorContainer>
   )

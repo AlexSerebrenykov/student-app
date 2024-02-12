@@ -1,8 +1,9 @@
+import { useEffect } from "react"
 import { Button, FormControl, InputLabel, Modal } from "@mui/material"
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
 import dayjs from "dayjs"
-import { useEffect } from "react"
+import isEqual from "lodash.isequal"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { IStudent } from "../../models/IStudent"
 import { studentsAPI } from "../../services/StudentService"
@@ -59,20 +60,30 @@ const ModalForm = () => {
   }, [studentToEdit])
 
   const onCloseModal = () => {
-    dispatch(editStudent(null))
     reset()
+    dispatch(editStudent(null))
     dispatch(handleModal(false))
   }
 
   const onSubmit: SubmitHandler<FormInputsType> = async student => {
     try {
       if (studentToEdit) {
-        const updatedStudent = { ...student, id: studentToEdit.id, isFeePaid: isPaidFeeToBool(student.isFeePaid) }
-        await updateStudent(updatedStudent).unwrap()
+        // eslint-disable-next-line
+        const {jobTitle, ...studentToEditCompare} = studentToEdit
+        
+        const updatedStudent = { 
+            ...student, 
+            id: studentToEdit.id, 
+            isFeePaid: isPaidFeeToBool(student.isFeePaid),
+            signingDate: dayjs(student.signingDate).toISOString()
+        }
+
+        if(!isEqual(studentToEditCompare, updatedStudent)) {
+          await updateStudent(updatedStudent).unwrap()
+        }
       } else {
         const newStudent = { ...student, isFeePaid: isPaidFeeToBool(student.isFeePaid) }
         await createStudent(newStudent).unwrap()
-        reset()
       }
       dispatch(handleSnackbar({ state: true, isError: false }))
       onCloseModal()
@@ -90,7 +101,7 @@ const ModalForm = () => {
     >
       <ModalContainer>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <form action='' onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <FormContainer>
               <Controller
                 name='avatar'

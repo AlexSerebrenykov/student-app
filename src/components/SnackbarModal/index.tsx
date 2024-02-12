@@ -19,7 +19,7 @@ const SnackbarModal: FC<SnackbarProps> = ({ snackbar }) => {
   return (
     <Snackbar
       open={snackbar.state}
-      autoHideDuration={3500}
+      autoHideDuration={3000}
       onClose={onSnackbarClose}
       anchorOrigin={{ horizontal: "center", vertical: "top" }}
     >

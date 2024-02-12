@@ -28,7 +28,7 @@ const DetailsControls: FC<DetailsControlsProps> = ({ student }) => {
     try {
       await deleteStudent(student?.id as string).unwrap()
       dispatch(handleSnackbar({ state: true, isError: false }))
-      goBack()
+      navigate("/")
     } catch (error) {
       dispatch(handleSnackbar({ state: true, isError: true }))
     }
