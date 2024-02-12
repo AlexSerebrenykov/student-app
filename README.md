@@ -10,7 +10,7 @@ npm install
 
 ## Env variable
 
-Create .env file and add VITE_BASE_URL variable with public url
+Create .env file and add VITE_BASE_URL variable with API endpoint
 
 ## Development Server
 
