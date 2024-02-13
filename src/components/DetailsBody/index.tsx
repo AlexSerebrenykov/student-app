@@ -1,6 +1,6 @@
 import { Unstable_Grid2 as Grid } from "@mui/material"
 import { FC } from "react"
-import InfoBox from "../../components/StudentCard/InfoBox"
+import InfoBox from "../../components/InfoBox"
 import { IStudent } from "../../models/IStudent"
 import { ImageContainer } from "./Styled"
 

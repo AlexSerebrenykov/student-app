@@ -7,7 +7,7 @@ import { studentsAPI } from "../../services/StudentService"
 import { useAppDispatch } from "../../store/hooks/redux"
 import { handleModal, handleSnackbar } from "../../store/reducers/ModalWindowsSlice"
 import { editStudent } from "../../store/reducers/StudentSlice"
-import InfoBox from "./InfoBox"
+import InfoBox from "../InfoBox"
 import { Card, CardContent, CardImage } from "./Styled"
 
 type StudentCardProps = {
