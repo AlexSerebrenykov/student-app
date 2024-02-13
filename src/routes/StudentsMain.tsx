@@ -9,7 +9,7 @@ import { handleSnackbar } from "../store/reducers/ModalWindowsSlice"
 import { selectStudents } from "../store/selectors"
 
 const StudentsMain = () => {
-  const { isError, isLoading } = studentsAPI.useFetchAllStudentsQuery(null)
+  const { isError, isLoading } = studentsAPI.useFetchAllStudentsQuery()
   const dispatch = useAppDispatch()
   const students = useAppSelector(selectStudents)
 
