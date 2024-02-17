@@ -1,19 +1,27 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
-export type FiltersState = {
-  type: "all" | "paid" | "unpaid"
+export const FILTER_OPTIONS = {
+  ALL: "ALL",
+  PAID: "PAID",
+  UNPAID: "UNPAID",
+} as const
+
+type FilterOptions = keyof typeof FILTER_OPTIONS
+
+type FiltersState = {
+  option: FilterOptions
 }
 
 const initialState: FiltersState = {
-  type: "all",
+  option: FILTER_OPTIONS.ALL,
 }
 
 export const filtersSlice = createSlice({
   name: "filters",
   initialState,
   reducers: {
-    changeFilter: (state, action) => {
-      state.type = action.payload
+    changeFilter: (state, action: PayloadAction<FilterOptions>) => {
+      state.option = action.payload
     },
   },
 })

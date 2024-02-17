@@ -17,6 +17,7 @@ export const CardContent = styled(MuiCardContent)(({ theme }) => ({
     padding: 0,
   },
 }))
+
 export const CardImage = styled(CardMedia)({
   height: "100%",
   borderRadius: "10px",

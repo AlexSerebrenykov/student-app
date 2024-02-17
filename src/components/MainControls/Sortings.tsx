@@ -1,23 +1,23 @@
 import { Button, Stack } from "@mui/material"
 import { useAppDispatch, useAppSelector } from "../../store/hooks/redux"
-import { changeSort } from "../../store/reducers/SortSlice"
+import { SORT_OPTIONS, changeSort } from "../../store/reducers/SortSlice"
 import { selectActiveSort } from "../../store/selectors"
 
 const Sortings = () => {
   const dispatch = useAppDispatch()
-  const { type } = useAppSelector(selectActiveSort)
+  const { option } = useAppSelector(selectActiveSort)
 
   const sortBySignInDate = () => {
-    dispatch(changeSort("signInDate"))
+    dispatch(changeSort(SORT_OPTIONS.SIGN_IN_DATE))
   }
   const sortByName = () => {
-    dispatch(changeSort("name"))
+    dispatch(changeSort(SORT_OPTIONS.NAME))
   }
 
   return (
     <Stack direction='row' spacing={4}>
       <Button
-        disabled={type === "signInDate"}
+        disabled={option === SORT_OPTIONS.SIGN_IN_DATE}
         variant='text'
         color='secondary'
         sx={{ textDecoration: "underline" }}
@@ -26,7 +26,7 @@ const Sortings = () => {
         Sort by sign in date
       </Button>
       <Button
-        disabled={type === "name"}
+        disabled={option === SORT_OPTIONS.NAME}
         variant='text'
         color='secondary'
         sx={{ textDecoration: "underline" }}
