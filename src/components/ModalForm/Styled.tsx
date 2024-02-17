@@ -6,11 +6,14 @@ const ModalContainer = styled(Box)(({ theme }) => ({
   left: "50%",
   padding: theme.spacing(11, 5, 5, 5),
   transform: "translate(-50%, -50%)",
-  maxWidth: "435px",
+  maxWidth: "365px",
   width: "100%",
   backgroundColor: "#ffffff",
   border: `1px solid ${theme.palette.secondary.main}`,
   borderRadius: "10px",
+  [theme.breakpoints.up("sm")]: {
+    maxWidth: "435px",
+  },
 }))
 
 const FormContainer = styled(Box)(({ theme: { spacing } }) => ({
