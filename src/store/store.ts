@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
-import { studentsAPI } from "../services/StudentService"
+import { studentsApiMiddleware, studentsApiReducer, studentsApiReducerPath } from "../services/StudentService"
 import filtersReducer from "./reducers/FiltersSlice"
 import modalWindowsReducer from "./reducers/ModalWindowsSlice"
 import sortReducer from "./reducers/SortSlice"
@@ -10,13 +10,13 @@ const rootReducer = combineReducers({
   filtersReducer,
   modalWindowsReducer,
   studentReducer,
-  [studentsAPI.reducerPath]: studentsAPI.reducer,
+  [studentsApiReducerPath]: studentsApiReducer,
 })
 
 export const setupStore = () => {
   return configureStore({
     reducer: rootReducer,
-    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(studentsAPI.middleware),
+    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(studentsApiMiddleware),
   })
 }
 

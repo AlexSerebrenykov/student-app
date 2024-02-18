@@ -10,7 +10,7 @@ function invalidateOn<T>({ success = [], error = [] }: InvalidateOnType<T>) {
   return (result: unknown) => (result ? success : error)
 }
 
-export const studentsAPI = createApi({
+const studentsAPI = createApi({
   reducerPath: "studentAPI",
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_BASE_URL,
@@ -54,3 +54,18 @@ export const studentsAPI = createApi({
     }),
   }),
 })
+
+export const {
+  useFetchAllStudentsQuery,
+  useFetchSingleStudentQuery,
+  useCreateStudentMutation,
+  useUpdateStudentMutation,
+  useDeleteStudentMutation,
+} = studentsAPI
+
+export const {
+  middleware: studentsApiMiddleware,
+  reducer: studentsApiReducer,
+  reducerPath: studentsApiReducerPath,
+  endpoints: studentsApiEndpoints,
+} = studentsAPI

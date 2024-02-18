@@ -3,7 +3,7 @@ import moment from "moment"
 import { FC } from "react"
 import { Link } from "react-router-dom"
 import { IStudent } from "../../models/IStudent"
-import { studentsAPI } from "../../services/StudentService"
+import { useDeleteStudentMutation } from "../../services/StudentService"
 import { useAppDispatch } from "../../store/hooks/redux"
 import { handleModal, handleSnackbar } from "../../store/reducers/ModalWindowsSlice"
 import { editStudent } from "../../store/reducers/StudentSlice"
@@ -17,7 +17,7 @@ const StudentCard: FC<StudentCardProps> = ({ student }) => {
   const { id, name, avatar, isFeePaid, signingDate } = student
   const dispatch = useAppDispatch()
 
-  const [deleteStudent] = studentsAPI.useDeleteStudentMutation()
+  const [deleteStudent] = useDeleteStudentMutation()
 
   const convertedSigningDate = moment(new Date(signingDate)).format("YYYY-MM-DD")
 

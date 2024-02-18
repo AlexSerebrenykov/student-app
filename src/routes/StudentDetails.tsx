@@ -5,14 +5,14 @@ import { useParams } from "react-router-dom"
 import DetailsBody from "../components/DetailsBody"
 import DetailsControls from "../components/DetailsControls"
 import ErrorComponent from "../components/ErrorComponent"
-import { studentsAPI } from "../services/StudentService"
+import { useFetchSingleStudentQuery } from "../services/StudentService"
 import { useAppDispatch } from "../store/hooks/redux"
 import { handleSnackbar } from "../store/reducers/ModalWindowsSlice"
 
 const StudentDetails = () => {
   const { id } = useParams()
   const dispatch = useAppDispatch()
-  const { data: student, isLoading, isError } = studentsAPI.useFetchSingleStudentQuery(id as string)
+  const { data: student, isLoading, isError } = useFetchSingleStudentQuery(id as string)
   const convertedSigningDate = moment(student?.signingDate).format("Do MMMM YYYY")
   const bodyStudent = { ...student, signingDate: convertedSigningDate }
 

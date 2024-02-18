@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { IStudent } from "../../models/IStudent"
-import { studentsAPI } from "../../services/StudentService"
+import { studentsApiEndpoints } from "../../services/StudentService"
 
 export interface StudentState {
   students: IStudent[]
@@ -14,7 +14,7 @@ const initialState: StudentState = {
   isLoading: false,
 }
 
-export const studentSlice = createSlice({
+const studentSlice = createSlice({
   name: "student",
   initialState,
   reducers: {
@@ -23,58 +23,57 @@ export const studentSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addMatcher(studentsAPI.endpoints.fetchAllStudents.matchPending, state => {
+    builder.addMatcher(studentsApiEndpoints.fetchAllStudents.matchPending, state => {
       state.isLoading = true
     })
     builder.addMatcher(
-      studentsAPI.endpoints.fetchAllStudents.matchFulfilled,
+      studentsApiEndpoints.fetchAllStudents.matchFulfilled,
       (state, action: PayloadAction<IStudent[]>) => {
         state.students = action.payload
         state.isLoading = false
       }
     )
-    builder.addMatcher(studentsAPI.endpoints.fetchAllStudents.matchRejected, state => {
+    builder.addMatcher(studentsApiEndpoints.fetchAllStudents.matchRejected, state => {
       state.isLoading = false
     })
-    builder.addMatcher(studentsAPI.endpoints.fetchSingleStudent.matchPending, state => {
+    builder.addMatcher(studentsApiEndpoints.fetchSingleStudent.matchPending, state => {
       state.isLoading = true
     })
-    builder.addMatcher(studentsAPI.endpoints.fetchSingleStudent.matchFulfilled, state => {
+    builder.addMatcher(studentsApiEndpoints.fetchSingleStudent.matchFulfilled, state => {
       state.isLoading = false
     })
-    builder.addMatcher(studentsAPI.endpoints.fetchSingleStudent.matchRejected, state => {
+    builder.addMatcher(studentsApiEndpoints.fetchSingleStudent.matchRejected, state => {
       state.isLoading = false
     })
-    builder.addMatcher(studentsAPI.endpoints.updateStudent.matchPending, state => {
+    builder.addMatcher(studentsApiEndpoints.updateStudent.matchPending, state => {
       state.isLoading = true
     })
-    builder.addMatcher(studentsAPI.endpoints.updateStudent.matchFulfilled, state => {
+    builder.addMatcher(studentsApiEndpoints.updateStudent.matchFulfilled, state => {
       state.isLoading = false
     })
-    builder.addMatcher(studentsAPI.endpoints.updateStudent.matchRejected, state => {
+    builder.addMatcher(studentsApiEndpoints.updateStudent.matchRejected, state => {
       state.isLoading = false
     })
-    builder.addMatcher(studentsAPI.endpoints.createStudent.matchPending, state => {
+    builder.addMatcher(studentsApiEndpoints.createStudent.matchPending, state => {
       state.isLoading = true
     })
-    builder.addMatcher(studentsAPI.endpoints.createStudent.matchFulfilled, state => {
+    builder.addMatcher(studentsApiEndpoints.createStudent.matchFulfilled, state => {
       state.isLoading = false
     })
-    builder.addMatcher(studentsAPI.endpoints.createStudent.matchRejected, state => {
+    builder.addMatcher(studentsApiEndpoints.createStudent.matchRejected, state => {
       state.isLoading = false
     })
-    builder.addMatcher(studentsAPI.endpoints.deleteStudent.matchPending, state => {
+    builder.addMatcher(studentsApiEndpoints.deleteStudent.matchPending, state => {
       state.isLoading = true
     })
-    builder.addMatcher(studentsAPI.endpoints.deleteStudent.matchFulfilled, state => {
+    builder.addMatcher(studentsApiEndpoints.deleteStudent.matchFulfilled, state => {
       state.isLoading = false
     })
-    builder.addMatcher(studentsAPI.endpoints.deleteStudent.matchRejected, state => {
+    builder.addMatcher(studentsApiEndpoints.deleteStudent.matchRejected, state => {
       state.isLoading = false
     })
   },
 })
 
 export default studentSlice.reducer
-
 export const { editStudent } = studentSlice.actions

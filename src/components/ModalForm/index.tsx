@@ -6,7 +6,7 @@ import isEqual from "lodash.isequal"
 import { useEffect } from "react"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { IStudent } from "../../models/IStudent"
-import { studentsAPI } from "../../services/StudentService"
+import { useCreateStudentMutation, useUpdateStudentMutation } from "../../services/StudentService"
 import { useAppDispatch, useAppSelector } from "../../store/hooks/redux"
 import { handleModal, handleSnackbar } from "../../store/reducers/ModalWindowsSlice"
 import { editStudent } from "../../store/reducers/StudentSlice"
@@ -28,8 +28,8 @@ const isPaidFeeToString = (value: boolean | undefined) => (value === true ? "yes
 const ModalForm = () => {
   const dispatch = useAppDispatch()
   const studentToEdit = useAppSelector(selectStudentToEdit)
-  const [createStudent] = studentsAPI.useCreateStudentMutation()
-  const [updateStudent] = studentsAPI.useUpdateStudentMutation()
+  const [createStudent] = useCreateStudentMutation()
+  const [updateStudent] = useUpdateStudentMutation()
 
   const {
     handleSubmit,

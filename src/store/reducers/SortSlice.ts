@@ -15,7 +15,7 @@ const initialState: SortState = {
   option: SORT_OPTIONS.SIGN_IN_DATE,
 }
 
-export const sortSlice = createSlice({
+const sortSlice = createSlice({
   name: "sort",
   initialState,
   reducers: {
@@ -26,5 +26,4 @@ export const sortSlice = createSlice({
 })
 
 export default sortSlice.reducer
-
 export const { changeSort } = sortSlice.actions

@@ -2,7 +2,7 @@ import { Box, Button } from "@mui/material"
 import { FC } from "react"
 import { useNavigate } from "react-router-dom"
 import { IStudent } from "../../models/IStudent"
-import { studentsAPI } from "../../services/StudentService"
+import { useDeleteStudentMutation } from "../../services/StudentService"
 import { useAppDispatch } from "../../store/hooks/redux"
 import { handleModal, handleSnackbar } from "../../store/reducers/ModalWindowsSlice"
 import { editStudent } from "../../store/reducers/StudentSlice"
@@ -14,7 +14,7 @@ const DetailsControls: FC<DetailsControlsProps> = ({ student }) => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
-  const [deleteStudent] = studentsAPI.useDeleteStudentMutation()
+  const [deleteStudent] = useDeleteStudentMutation()
 
   const goBack = () => {
     navigate(-1)

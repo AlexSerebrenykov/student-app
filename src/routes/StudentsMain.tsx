@@ -3,13 +3,13 @@ import { useEffect } from "react"
 import ErrorComponent from "../components/ErrorComponent"
 import MainHead from "../components/MainHead"
 import StudentsList from "../components/StudentsList"
-import { studentsAPI } from "../services/StudentService"
+import { useFetchAllStudentsQuery } from "../services/StudentService"
 import { useAppDispatch, useAppSelector } from "../store/hooks/redux"
 import { handleSnackbar } from "../store/reducers/ModalWindowsSlice"
 import { selectStudents } from "../store/selectors"
 
 const StudentsMain = () => {
-  const { isError, isLoading } = studentsAPI.useFetchAllStudentsQuery()
+  const { isError, isLoading } = useFetchAllStudentsQuery()
   const dispatch = useAppDispatch()
   const students = useAppSelector(selectStudents)
 
